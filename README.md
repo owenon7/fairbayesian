@@ -33,7 +33,11 @@ abstains when no deterministic prediction is consistent with the evidence.
   formulation is solver-independent in principle, but the code currently calls
   Gurobi directly through `gurobipy`.
 
-Python package versions are pinned in `requirements.txt`.
+Python package versions are pinned in `requirements.txt`. One dependency
+(`pmcboost`, the PMC multicalibration baseline of La Cava & Lett) is installed
+directly from GitHub, so `pip` needs access to `git` on the `PATH`. If you
+prefer not to install it, pass `--skip-pmc` to `run_experiments.py` to train
+only the decision tree and neural network baselines.
 
 ## Setup
 
