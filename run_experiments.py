@@ -642,7 +642,11 @@ def plot_race_dnodes(dndf: pd.DataFrame, ds: str, out_dir: Path, race_col: str =
     size_edges = [0, 25, 50, 100, float("inf")]
     size_labels = ["1-25", "26-50", "51-100", ">100"]
     race_groups = sorted(dndf[race_col].unique().tolist())
-    colors = ["#d62728", "#1f77b4", "#2ca02c", "#ff7f0e"][: len(race_groups)]
+    # Monochrome-safe sequential blues (matplotlib `Blues` colormap).
+    # Distinct luminance levels remain distinguishable when printed in B&W
+    # and stay consistent with `steelblue` used elsewhere in the paper.
+    _BLUES = ["#08306b", "#9ecae1", "#4292c6", "#c6dbef"]
+    colors = _BLUES[: len(race_groups)]
 
     local = dndf[[race_col, "Count"]].copy()
     local["_rb"] = pd.cut(local["Count"], bins=size_edges, labels=size_labels)
